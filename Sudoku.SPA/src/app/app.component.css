@@ -1,0 +1,14 @@
+.content div {
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.modal-title
+{
+    font-size:20px;
+}
+
+.navigator
+{
+    cursor:pointer;
+}

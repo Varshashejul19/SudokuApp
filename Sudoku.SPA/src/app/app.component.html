@@ -1,0 +1,62 @@
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">New Game</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <div class="content" [hidden]="!step1">
+      <div class="col-lg-12">To start a new game, select the number of players first.</div>
+      <div class="col-lg-12" data-property="player_mode" data-disposition="radio" style="text-align: center;">
+        <button class="btn btn-outline-primary" style="margin-right:10px;" data-value="singleplayer" (click)="next(1)">
+          Single-Player
+        </button>
+        <button class="btn btn-outline-primary" data-value="multiplayer" disabled="disabled">
+          Multi-Player
+        </button>
+
+      </div>
+    </div>
+
+
+    <div class="content" [hidden]="!step2">
+      <div class="copy">
+        <span>You selected a </span>
+        <strong>single player</strong>
+        <span> game. Go</span>
+        <a class="navigator" data-target="player_mode" data-source="difficulty" (click)="next(2)"> back</a>
+        <span> to change.</span>
+      </div>
+
+      <div class="selectors radio" data-property="difficulty" data-disposition="radio" style="text-align: center;">
+
+        <button class="btn btn-outline-primary" style="margin-right:10px;" (click)="selectLevel('easy')">
+          Easy
+        </button>
+        <button class="btn btn-outline-primary" style="margin-right:10px;"  (click)="selectLevel('medium')">
+          Medium
+        </button>
+        <button class="btn btn-outline-primary" style="margin-right:10px;"  (click)="selectLevel('hard')">
+          Hard
+        </button>
+        <button class="btn btn-outline-primary" style="margin-right:10px;"  (click)="selectLevel('random')">
+          Random
+        </button>
+      </div>
+    </div>
+
+
+    <div class="content" [hidden]="!step3">
+      <div class="copy">Are you sure you want to cancel your current game.</div>
+      <div class="selectors" data-property="cancel_confirm" data-disposition="radio">
+        <button class="btn btn-outline-primary" style="margin-right:10px;" (click)="close()">
+          No
+        </button>
+        <button class="btn btn-outline-primary" style="margin-right:10px;" (click)="next(3)">
+          Yes
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<app-gameboard [level]="level" (openNew)="openNew()"></app-gameboard>
