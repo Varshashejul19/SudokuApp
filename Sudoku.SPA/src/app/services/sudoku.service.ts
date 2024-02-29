@@ -17,12 +17,15 @@ export class SudokuService {
     return this.httpClient.get<any>(`${this.baseUrl}/board?difficulty=` + level)
   }
 
-  public validateBoard(data: any): Observable<any> {
-    return this.httpClient.post<any>(`${this.baseUrl}/validate`, "board:" + data, {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/x-www-form-urlencoded'
-      })
-    })
+  public validateBoard(board: any[][]): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded'
+    });
+
+    const formData = new URLSearchParams();
+    formData.set('board', JSON.stringify(board));
+
+    return this.httpClient.post<any>(`${this.baseUrl}/validate`, formData.toString(), { headers });
   }
 
   public solveBoard(data: any): Observable<any> {

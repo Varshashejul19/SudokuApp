@@ -119,7 +119,8 @@ export class GameboardComponent {
 
   validateBoard(): void {
     var data = this.getUserData();
-    this.service.validateBoard(JSON.stringify(data.board)).subscribe(resp => {
+
+    this.service.validateBoard(data).subscribe(resp => {
       alert(resp.status)
     });
 
@@ -156,18 +157,13 @@ export class GameboardComponent {
     this.openPopup.emit();
   }
 
-  getUserData(): any {
+  getUserData(): any[][] {
     let res: any[][] = [];
     this.board.cells.forEach((element, colIndex) => {
       let oneDimensionalArray = element.map(obj => obj.guess);
       res.push(oneDimensionalArray);
     });
-
-    var json =
-    {
-      board: res
-    };
-
-    return json;
+    
+    return res;
   }
 }
