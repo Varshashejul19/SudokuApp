@@ -76,8 +76,11 @@ export class GameboardComponent {
 
   onCellSelect(cell: Cell): void {
     if (this.activeNumber == -1 || cell.guess == this.activeNumber) {
+      if (cell.guess == undefined)
+        alert("Please select the number from the below and then try to map the cell.")
+
       cell.makeGuess(undefined);
-      alert("Please select the number from the below and then try to map the cell.")
+
     } else {
       cell.makeGuess(this.activeNumber);
     }
@@ -163,7 +166,7 @@ export class GameboardComponent {
       let oneDimensionalArray = element.map(obj => obj.guess);
       res.push(oneDimensionalArray);
     });
-    
+
     return res;
   }
 }
